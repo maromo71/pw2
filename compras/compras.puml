@@ -1,0 +1,45 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Cliente {
+    - id: int
+    - nome: string
+    + Cliente(id: int, nome: string)
+    + getId(): int
+    + getNome(): string
+    + exibirDetalhes(): string
+}
+
+class Produto {
+    - id: int
+    - nome: string
+    - preco: float
+    + Produto(id: int, nome: string, preco: float)
+    + getId(): int
+    + getNome(): string
+    + getPreco(): float
+    + exibirDetalhes(): string
+}
+
+class Carrinho {
+    - produtos: Produto[*]
+    + adicionarProduto(produto: Produto)
+    + getProdutos(): Produto[*]
+    + getTotal(): float
+}
+
+class Pedido {
+    - cliente: Cliente
+    - carrinho: Carrinho
+    - data: string
+    + Pedido(cliente: Cliente, carrinho: Carrinho)
+    + getCliente(): Cliente
+    + getCarrinho(): Carrinho
+    + getData(): string
+    + exibirDetalhes(): void
+}
+
+Pedido "1" *-- "1" Cliente : tem
+Pedido "1" *-- "1" Carrinho : tem
+Carrinho "1" -- "n" Produto : contém
+@enduml
